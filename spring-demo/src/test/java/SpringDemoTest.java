@@ -1,4 +1,6 @@
 import com.lx.spring.Blue;
+import com.lx.spring.Car;
+import com.lx.spring.LifeStyleConfig;
 import com.lx.spring.MyConfig;
 import com.lx.spring.Person;
 import com.lx.spring.Yellow;
@@ -44,6 +46,17 @@ public class SpringDemoTest {
 
         String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
         Arrays.stream(beanDefinitionNames).forEach(System.out::println);
+    }
+
+    @Test
+    public void testLifeStyle() {
+        // 实例化 -> 初始化 ->(使用...) -> 销毁
+        // @Bean :
+        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(LifeStyleConfig.class);
+//        applicationContext.refresh();
+        Car car = applicationContext.getBean(Car.class);
+        System.out.println("car = " + car);
+        applicationContext.close();
     }
 
 }
